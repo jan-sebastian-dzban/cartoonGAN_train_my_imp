@@ -74,7 +74,7 @@ class CartoonGANTrainer:
 
                 print("Initialization Phase [{0}/{1}], {2:.4f} seconds".format(init_epoch + 1, initialization_epochs,
                                                                              time.time() - start))
-                self.save_checkpoint(os.path.join(save_path, 'checkpoint-epoch-{0}.ckpt'.format(init_epoch+1,)))
+                self.save_checkpoint(os.path.join(save_path, 'checkpoint-int-epoch-{0}.ckpt'.format(init_epoch+1,)))
 
                 self.curr_initialization_epoch += 1
 
