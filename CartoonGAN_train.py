@@ -52,7 +52,7 @@ class CartoonGANTrainer:
         self.print_every = Config.print_every
 
     def train(self, num_epochs=Config.num_epochs, initialization_epochs=Config.initialization_epochs,
-              save_path='checkpoints/CartoonGAN/'):
+              save_path='/content/drive/MyDrive/cartoon_my/checkpoints/'):
         # if not initialized, do it!
         if self.curr_initialization_epoch < initialization_epochs:
             for init_epoch in range(self.curr_initialization_epoch, initialization_epochs):
@@ -74,6 +74,8 @@ class CartoonGANTrainer:
 
                 print("Initialization Phase [{0}/{1}], {2:.4f} seconds".format(init_epoch + 1, initialization_epochs,
                                                                              time.time() - start))
+                self.save_checkpoint(os.path.join(save_path, 'checkpoint-epoch-{0}.ckpt'.format(init_epoch+1,)))
+
                 self.curr_initialization_epoch += 1
 
         for epoch in range(self.curr_epoch, num_epochs):
@@ -99,6 +101,7 @@ class CartoonGANTrainer:
                 self.loss_D_hist.append(loss_D)
                 self.loss_G_hist.append(loss_G)
                 self.loss_content_hist.append(loss_content)
+                self.save_checkpoint(os.path.join(save_path, 'checkpoint-epoch-{0}.ckpt'.format(epoch + 1)))
 
                 if (ix + 1) % self.print_every == 0:
                     print("Training Phase Epoch {0} Iteration {1}, loss_D: {2:.4f}, "
