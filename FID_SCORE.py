@@ -203,6 +203,7 @@ def _compute_statistics_of_path(path, model, batch_size, dims, cuda):
 def calculate_fid_given_paths(paths, batch_size, cuda, dims):
     """Calculates the FID of two paths"""
     for p in paths:
+        print(p)
         if not os.path.exists(p):
             raise RuntimeError('Invalid path: %s' % p)
 
@@ -224,7 +225,10 @@ def calculate_fid_given_paths(paths, batch_size, cuda, dims):
 if __name__ == '__main__':
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('path', type=str, nargs=2,
+    parser.add_argument('--path1', type=str, nargs=1,
+                        help=('Path to the generated images or '
+                            'to .npz statistic files'))
+    parser.add_argument('--path2', type=str, nargs=1,
                         help=('Path to the generated images or '
                             'to .npz statistic files'))
     parser.add_argument('--batch-size', type=int, default=50,
@@ -237,10 +241,13 @@ if __name__ == '__main__':
                         help='GPU to use (leave blank for CPU only)')
 
     args = parser.parse_args()
-    
+    x=''.join(args.path1)
+    y=''.join(args.path2)
+    print(type(args.path1))
+    print([x, y])
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
-    fid_value = calculate_fid_given_paths(args.path,
+    fid_value = calculate_fid_given_paths([x,y],
                                           args.batch_size,
                                           args.gpu != '',
                                           args.dims)
