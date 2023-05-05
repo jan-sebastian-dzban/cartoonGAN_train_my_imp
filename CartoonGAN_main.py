@@ -107,13 +107,15 @@ def main():
 
     print("Creating models...")
     if args.use_modified_model:
-        Generator = modified_models.Generator
-        Discriminator = modified_models.Discriminator
-        FeatureExtractor = modified_models.FeatureExtractor
-    else:
         Generator = models.Generator
         Discriminator = models.Discriminator
         FeatureExtractor = models.FeatureExtractor
+
+    else:
+
+        Generator = modified_models.Generator
+        Discriminator = modified_models.Discriminator
+        FeatureExtractor = modified_models.FeatureExtractor
 
     generator = Generator().to(device)
 
