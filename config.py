@@ -9,7 +9,7 @@ class CartoonGANConfig:
     photo_image_dir = "train_photo_equal/"
     animation_image_dir = "style/"
     edge_smoothed_image_dir = "smooth/"
-    test_photo_image_dir = "test/"
+    test_photo_image_dir = "HR_photo/"
 
     # CartoonGAN_train.py
     adam_beta1 = 0.5  # following dcgan
@@ -28,7 +28,7 @@ class CycleGANConfig:
     photo_image_dir = "train_photo_equal/"
     animation_image_dir = "style/"
     edge_smoothed_image_dir = "smooth/"
-    test_photo_image_dir = "test/"
+    test_photo_image_dir = "HR_photo/"
     
     # CycleGAN_train.py
     lambda_cycle = 10.0  # lambda parameter for cycle loss, X -> Y -> X and Y -> X -> Y
