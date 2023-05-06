@@ -79,7 +79,8 @@ class CycleGANTrainer:
 
                 # print progress
                 if (ix + 1) % self.print_every == 0:
-                  self.save_checkpoint(os.path.join(save_path, 'checkpoint-epoch-int-{0}.ckpt'.format(num_epochs)))
+
+                    self.save_checkpoint(os.path.join(save_path, 'checkpoint-epoch-{0}.ckpt'.format(num_epochs)))
                     print("Initialization Phase Epoch {0} Iteration {1}: Content Loss: {2:.4f}".format(init_epoch + 1,
                                                                                                        ix + 1,
                                                                                                        epoch_loss / (
@@ -88,6 +89,7 @@ class CycleGANTrainer:
             print("Initialization Phase [{0}/{1}], {2:.4f} seconds".format(init_epoch + 1, initialization_epochs,
                                                                            time.time() - start))
             self.curr_initialization_epoch += 1
+            self.save_checkpoint(os.path.join(save_path, 'checkpoint-epoch-int{0}.ckpt'.format(num_epochs)))
 
         for epoch in range(self.curr_epoch, num_epochs):
             start = time.time()
@@ -126,7 +128,7 @@ class CycleGANTrainer:
 
                 # print progress
                 if (ix + 1) % self.print_every == 0:
-                  print("Training Phase [{0}/{1}], {2:.4f} seconds".format(self.curr_epoch, num_epochs, time.time() - start))
+                    self.save_checkpoint(os.path.join(save_path, 'checkpoint-epoch-{0}.ckpt'.format(num_epochs)))
                     print("Training Phase Epoch {0} Iteration {1}: loss_D_x: {2:.4f} loss_D_y: {3:.4f} loss_G: {4:.4f} loss_F: {5:.4f} "
                           "loss_cycle: {6:.4f} loss_identity: {7:.4f}".format(epoch + 1, ix+1, epoch_loss_D_x / (ix + 1), epoch_loss_D_y / (ix + 1),
                                                                               epoch_loss_G_GAN / (ix + 1), epoch_loss_F_GAN / (ix + 1),
