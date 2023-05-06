@@ -25,11 +25,11 @@ class CycleGANConfig:
     # dataloader.py
     batch_size = 4
     num_workers = 4
-    photo_image_dir = "data/photo/"
-    animation_image_dir = "data/animation/"
-    edge_smoothed_image_dir = "data/edge_smoothed/"
-    test_photo_image_dir = "data/test/"
-
+    photo_image_dir = "train_photo_equal/"
+    animation_image_dir = "style/"
+    edge_smoothed_image_dir = "smooth/"
+    test_photo_image_dir = "test/"
+    
     # CycleGAN_train.py
     lambda_cycle = 10.0  # lambda parameter for cycle loss, X -> Y -> X and Y -> X -> Y
     lambda_identity = 0.5  # lambda parameter for identity loss, helpful for image style transfer task
