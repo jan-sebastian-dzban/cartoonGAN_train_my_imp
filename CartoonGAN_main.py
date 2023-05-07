@@ -74,7 +74,8 @@ def load_model(generator, discriminator, checkpoint_path):
 
 def load_generator(generator, checkpoint_path):
     checkpoint = torch.load(checkpoint_path, map_location=Config.device)
-    generator.load_state_dict(checkpoint['generator_state_dict'])
+    generator.load_state_dict(checkpoint['generator_state_dict'],False)
+
 
 
 def generate_and_save_images(generator, test_image_loader, save_path):
@@ -92,6 +93,9 @@ def generate_and_save_images(generator, test_image_loader, save_path):
             generated_images = generator(test_images).detach().cpu()
 
             for i in range(len(generated_images)):
+                image = test_images[i]
+                image = torch_to_image(image)
+                image.save(os.path.join(save_path, 'test{0}.jpg'.format(image_ix)))
                 image = generated_images[i]
                 image = torch_to_image(image)
                 image.save(os.path.join(save_path, '{0}.jpg'.format(image_ix)))
@@ -104,7 +108,7 @@ def main():
 
     device = Config.device
     print("PyTorch running with device {0}".format(device))
-
+    
     print("Creating models...")
     if args.use_modified_model:
         Generator = models.Generator
@@ -139,12 +143,12 @@ def main():
         tvutils.save_image(image_batch, 'test_images.jpg', nrow=4, padding=2, normalize=True, range=(-1, 1))
         tvutils.save_image(new_images, 'generated_images.jpg', nrow=4, padding=2, normalize=True, range=(-1, 1))
 
-        if not os.path.isdir('generated_images/CartoonGAN'):
-            os.makedirs('generated_images/CartoonGAN/')
+        if not os.path.isdir('/content/drive/MyDrive/catroon_my/generated_images/CartoonGAN'):
+            os.makedirs('/content/drive/MyDrive/catroon_my/generated_images/CartoonGAN/')
             
         print("Generating Images")
         # generate new images for all images in args.test_image_path, and save them to generated_images/CartoonGAN/ directory
-        generate_and_save_images(generator, test_images, 'generated_images/CartoonGAN/')
+        generate_and_save_images(generator, test_images, '/content/drive/MyDrive/catroon_my/generated_images/CartoonGAN/')
 
     else:
         print("Training...")
@@ -172,6 +176,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
 
