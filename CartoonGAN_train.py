@@ -68,6 +68,7 @@ class CartoonGANTrainer:
 
                     # print progress
                     if (ix + 1) % self.print_every == 0:
+                        self.save_checkpoint(os.path.join(save_path, 'checkpoint-int-epoch-{0}.ckpt'.format(init_epoch+1,)))
                         print("Initialization Phase Epoch {0} Iteration {1}: Content Loss: {2:.4f}".format(init_epoch+1,
                                                                                                            ix + 1,
                                                                                                            epoch_loss / (ix + 1)))
