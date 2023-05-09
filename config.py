@@ -6,7 +6,7 @@ class CartoonGANConfig:
     # dataloader.py
     batch_size = 8
     num_workers = 4
-    photo_image_dir = "train_photo_equal/"
+    photo_image_dir = "train_photo/"
     animation_image_dir = "style/"
     edge_smoothed_image_dir = "smooth/"
     test_photo_image_dir = "HR_photo/"
@@ -25,7 +25,7 @@ class CycleGANConfig:
     # dataloader.py
     batch_size = 4
     num_workers = 4
-    photo_image_dir = "train_photo_equal/"
+    photo_image_dir = "train_photo/"
     animation_image_dir = "style/"
     edge_smoothed_image_dir = "smooth/"
     test_photo_image_dir = "HR_photo/"
