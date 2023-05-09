@@ -74,7 +74,7 @@ def load_model(generator, discriminator, checkpoint_path):
 
 def load_generator(generator, checkpoint_path):
     checkpoint = torch.load(checkpoint_path, map_location=Config.device)
-    generator.load_state_dict(checkpoint['generator_state_dict'],False)
+    generator.load_state_dict(checkpoint['generator_state_dict'])
 
 
 
